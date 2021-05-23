@@ -14,7 +14,7 @@ MXE_TC=${MXE_TC:-x86_64-w64-mingw32.static}
 STRIP=${MXE_TC}-strip
 TIMESTAMP=${TIMESTAMP:-`date +%Y%m%d%H%M`}
 VERSION=`cat $APP/fusepdf.pro | sed '/VERSION =/!d' | awk '{print $3}'`
-COMMIT=`git rev-parse --short HEAD`
+COMMIT=`(cd $APP; git rev-parse --short HEAD)`
 TAG=${TAG:--${TIMESTAMP}-${COMMIT}}
 ZIP="FusePDF-$VERSION$TAG.zip"
 FOLDER="FusePDF-$VERSION$TAG"
