@@ -50,7 +50,7 @@ define $(PKG)_BUILD
             -nomake tests \
             -qt-zlib \
             -qt-libpng \
-            -no-libjpeg \
+            -qt-libjpeg \
             -no-sqlite \
             -no-fontconfig \
             -qt-freetype \
