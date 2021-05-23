@@ -18,6 +18,12 @@ COMMIT=`(cd $APP; git rev-parse --short HEAD)`
 TAG=${TAG:--${TIMESTAMP}-${COMMIT}}
 ZIP="FusePDF-$VERSION$TAG.zip"
 FOLDER="FusePDF-$VERSION$TAG"
+BUNDLE=${BUNDLE:-0}
+
+if [ "${BUNDLE}" = 1 ]; then
+    ZIP="FusePDF-$VERSION$TAG-bundle.zip"
+    FOLDER="FusePDF-$VERSION$TAG-bundle"
+fi
 
 if [ ! -d "${MXE}" ]; then
     echo "Please setup MXE!"
@@ -34,6 +40,10 @@ make || exit 1
 mkdir $FOLDER || exit 1
 cp -a $APP/COPYING $FOLDER/ || exit 1
 cp release/FusePDF.exe $FOLDER || exit 1
+if [ "${BUNDLE}" = 1 ]; then
+    unzip ${MXE}/gs.zip
+    mv gs $FOLDER/ || exit 1
+fi
 $STRIP -s $FOLDER/*.exe || exit 1
 zip -r -9 $ZIP $FOLDER || exit 1
 
